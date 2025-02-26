@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	Cfg::Initialize();
 
 	
-	sf::RenderWindow gwnd(sf::VideoMode({ 800, 600 }), "My window", sf::Style::None);
+	sf::RenderWindow gwnd(sf::VideoMode({ 800, 600 }), "My window", sf::Style::Fullscreen);
 	sboxState = std::make_unique<SandboxState>(gwnd);
 
 	int result = InitProgram();
@@ -57,6 +57,10 @@ int main(int argc, char* argv[])
 			}
 		}
 		auto gameTime = gtimer.restart().asSeconds();
+		if (gameTime > 0.1f)
+		{
+			gameTime = 0.1f;
+		}
 		accumulator += gameTime;
 		if (gwnd.isOpen())
 		{

@@ -66,6 +66,9 @@
     <Filter Include="Source\Hodgepodge">
       <UniqueIdentifier>{84507c3d-e580-4fce-8b23-d053632f3730}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\FSM">
+      <UniqueIdentifier>{4075201c-a5ee-4559-987a-14faba3a55d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -108,6 +111,9 @@
     </ClCompile>
     <ClCompile Include="Source\Hodgepodge\Background.cpp">
       <Filter>Source\Hodgepodge</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FSM\FSMEvent.cpp">
+      <Filter>Source\FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +165,27 @@
     </ClInclude>
     <ClInclude Include="Source\Hodgepodge\Background.h">
       <Filter>Source\Hodgepodge</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FSM\DuckFold.h">
+      <Filter>Source\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FSM\Events.h">
+      <Filter>Source\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FSM\FSM.h">
+      <Filter>Source\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FSM\FSMEvent.h">
+      <Filter>Source\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FSM\IgnoreUnknownEvent.h">
+      <Filter>Source\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FSM\PlayerAnimFSM.h">
+      <Filter>Source\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FSM\PlayerAnimStates.h">
+      <Filter>Source\FSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

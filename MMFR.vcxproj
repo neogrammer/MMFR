@@ -148,6 +148,7 @@
     <ClCompile Include="SandboxState.cpp" />
     <ClCompile Include="Source\Animation\Animation.cpp" />
     <ClCompile Include="Source\Animation\Animator.cpp" />
+    <ClCompile Include="Source\FSM\FSMEvent.cpp" />
     <ClCompile Include="Source\GameObjects\DynamicObject.cpp" />
     <ClCompile Include="Source\GameObjects\GameObject.cpp" />
     <ClCompile Include="Source\GameObjects\player\Player.cpp" />
@@ -165,6 +166,13 @@
     <ClInclude Include="Source\Animation\Animation.h" />
     <ClInclude Include="Source\Animation\Animator.h" />
     <ClInclude Include="Source\Animation\AnimFrame.h" />
+    <ClInclude Include="Source\FSM\DuckFold.h" />
+    <ClInclude Include="Source\FSM\Events.h" />
+    <ClInclude Include="Source\FSM\FSM.h" />
+    <ClInclude Include="Source\FSM\FSMEvent.h" />
+    <ClInclude Include="Source\FSM\IgnoreUnknownEvent.h" />
+    <ClInclude Include="Source\FSM\PlayerAnimFSM.h" />
+    <ClInclude Include="Source\FSM\PlayerAnimStates.h" />
     <ClInclude Include="Source\GameObjects\DynamicObject.h" />
     <ClInclude Include="Source\GameObjects\GameObject.h" />
     <ClInclude Include="Source\GameObjects\player\Player.h" />
