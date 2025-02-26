@@ -183,16 +183,18 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 				// There's an overlap
 				sf::Sprite bgLayer0 = {};
 				bgLayer0.setTexture(Cfg::textures.get((int)texID[0]));
-				bgLayer0.setTextureRect(sf::IntRect(intersection));
-				bgLayer0.setPosition(wnd_.mapPixelToCoords({ 0,0 }));
+				bgLayer0.setTextureRect({ sf::Vector2i({sf::IntRect(intersection).left - (int)positions[0][0].x,
+					sf::IntRect(intersection).top}),{sf::IntRect(intersection).width,
+					sf::IntRect(intersection).height} });
+				bgLayer0.setPosition({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f) });
 				wnd_.draw(bgLayer0);
-			}
-			else
-			{
+			
 				sf::Sprite bgLayerCopy0 = {};
 				bgLayerCopy0.setTexture(Cfg::textures.get((int)texID[0]));
-				bgLayerCopy0.setTextureRect(sf::IntRect(intersection));
-				bgLayerCopy0.setPosition(wnd_.mapPixelToCoords({ 0,0 }));
+				bgLayerCopy0.setTextureRect({ sf::Vector2i({sf::IntRect(intersection).left - (int)positions[0][0].x,
+					sf::IntRect(intersection).top}),{sf::IntRect(intersection).width,
+					sf::IntRect(intersection).height} });
+				bgLayerCopy0.setPosition({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f) });
 				wnd_.draw(bgLayerCopy0);
 			}
 

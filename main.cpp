@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	Cfg::Initialize();
 
 	
-	sf::RenderWindow gwnd(sf::VideoMode({ 800, 600 }), "My window", sf::Style::Fullscreen);
+	sf::RenderWindow gwnd(sf::VideoMode({ 800, 600 }), "My window", sf::Style::None);
 	sboxState = std::make_unique<SandboxState>(gwnd);
 
 	int result = InitProgram();
