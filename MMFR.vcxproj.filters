@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source\Resources">
+      <UniqueIdentifier>{441e7738-9596-4186-a069-96e21bb79080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObjects">
+      <UniqueIdentifier>{1df6d262-48e8-4a36-b06f-c2e08054f132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Animation">
+      <UniqueIdentifier>{593e308b-5e5a-47de-bce1-fb71ad33b6cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameStates">
+      <UniqueIdentifier>{45473b07-d5db-4671-bc12-10612c181d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Tilemap">
+      <UniqueIdentifier>{7abbc475-7adb-43e4-9a1e-8400b07ca6ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Assets\Textures">
+      <UniqueIdentifier>{45920f37-86ae-4686-b8a2-6303355f7a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Fonts">
+      <UniqueIdentifier>{605aeb12-9078-4a27-ad51-2b26161f82f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Sound">
+      <UniqueIdentifier>{46a5473d-4b6a-417a-a38f-4f98483b24c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data">
+      <UniqueIdentifier>{651ea564-b942-4b40-aceb-7bd60fb1bcd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures\GameObjects">
+      <UniqueIdentifier>{d63d25cf-3103-4601-aea4-34751d1d8398}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures\Backgrounds">
+      <UniqueIdentifier>{b34a1ddf-2bd0-4f62-82f9-dee29fd09cfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures\Tilesets">
+      <UniqueIdentifier>{6439def0-8399-4289-910a-68de1920d209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures\GameObjects\Player">
+      <UniqueIdentifier>{e1f5cbbb-b065-47f4-ae15-0b0e83c26fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Physics">
+      <UniqueIdentifier>{1328a301-cef0-405f-8da9-078d3fd1ba29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resources\tpl">
+      <UniqueIdentifier>{cb7394d4-3b8b-484b-80e5-e1e5744397a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObjects\Player">
+      <UniqueIdentifier>{53f2ab3d-850d-4d4b-8da9-bb8258f82e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Tilesets">
+      <UniqueIdentifier>{ab31ec37-f5a2-47f2-8c23-771cc2e315a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Data\Tilemaps">
+      <UniqueIdentifier>{3d2eb486-82e9-4eba-9cd5-6444b1645a96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Hodgepodge">
+      <UniqueIdentifier>{84507c3d-e580-4fce-8b23-d053632f3730}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="SandboxState.cpp" />
+    <ClCompile Include="Source\Resources\Cfg.cpp">
+      <Filter>Source\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\BBox.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\GameObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\DynamicObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\StaticObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\TriggerObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\player\Player.cpp">
+      <Filter>Source\GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tilemap\Tile.cpp">
+      <Filter>Source\Tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Animation\Animation.cpp">
+      <Filter>Source\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Animation\Animator.cpp">
+      <Filter>Source\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\Physics.cpp">
+      <Filter>Source\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tilemap\Tilemap.cpp">
+      <Filter>Source\Tilemap</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Hodgepodge\Background.cpp">
+      <Filter>Source\Hodgepodge</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SandboxState.h" />
+    <ClInclude Include="Source\Resources\Cfg.h">
+      <Filter>Source\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resources\ResourceManager.h">
+      <Filter>Source\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\BBox.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\GameObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\DynamicObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\StaticObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\TriggerObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resources\Maps.h">
+      <Filter>Source\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation\AnimFrame.h">
+      <Filter>Source\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\player\Player.h">
+      <Filter>Source\GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tilemap\Tile.h">
+      <Filter>Source\Tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\Physics.h">
+      <Filter>Source\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation\Animation.h">
+      <Filter>Source\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation\Animator.h">
+      <Filter>Source\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tilemap\Tilemap.h">
+      <Filter>Source\Tilemap</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Hodgepodge\Background.h">
+      <Filter>Source\Hodgepodge</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\Invariant.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="Assets\Textures\tilesets\EmptyTile.png">
+      <Filter>Assets\Textures\Tilesets</Filter>
+    </Image>
+    <Image Include="Assets\Textures\tilesets\TSet1_50x50.png">
+      <Filter>Assets\Textures\Tilesets</Filter>
+    </Image>
+    <Image Include="Assets\Textures\backgrounds\GameStartBG.jpg">
+      <Filter>Assets\Textures\Backgrounds</Filter>
+    </Image>
+    <Image Include="Assets\Textures\GameObjects\Player\PlayerAtlas.png">
+      <Filter>Assets\Textures\GameObjects\Player</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Backgrounds\GameStartBGBig.jpg">
+      <Filter>Assets\Textures\Backgrounds</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Backgrounds\bgSpace.png">
+      <Filter>Assets\Textures\Backgrounds</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Backgrounds\bgSpace2.png">
+      <Filter>Assets\Textures\Backgrounds</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Resources\tpl\ResourceManager.tpl">
+      <Filter>Source\Resources\tpl</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Data\Tilemaps\Tilemap1.txt">
+      <Filter>Assets\Data\Tilemaps</Filter>
+    </Text>
+    <Text Include="Assets\Data\Tilesets\Tileset1.txt">
+      <Filter>Assets\Data\Tilesets</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
