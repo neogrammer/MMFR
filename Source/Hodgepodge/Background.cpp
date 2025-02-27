@@ -214,7 +214,7 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 				bgLayerCopy0.setTextureRect({ sf::Vector2i({(int)((int)abs(positions[0][0].x) - (int)sizes[0].x) + (int)(wnd_.getView().getCenter().x - 400.f) + (int)abs(positions[0][1].x),
 					(int)(abs(positions[0][1].y))}),{ 800 - (int)(std::max(800.f - (sizes[0].x - wnd_.getView().getCenter().x), 0.f)),
 					sf::IntRect(intersection).height} });
-				bgLayerCopy0.setPosition(sf::Vector2f({ (positions[0][0].x + sizes[0].x), (bgLayer0.getPosition().y) }));
+				bgLayerCopy0.setPosition(sf::Vector2f({ (positions[0][1].x + sizes[0].x), (bgLayer0.getPosition().y) }));
 				wnd_.draw(bgLayerCopy0);
 			}
 
