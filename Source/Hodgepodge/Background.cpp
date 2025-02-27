@@ -1,5 +1,5 @@
 #include "Background.h"
-
+#include <iostream>
 void Background::setParams(sf::Vector2f pos_, sf::Vector2f size_, Cfg::Textures texID_, int layer_, int level_)
 {
 
@@ -109,9 +109,9 @@ void Background::update(float dt_)
 	//	positions[2] = { 0.f,0.f };
 	//}
 	if (this->isBGCopyBehind)
-		positions[0][0] = { positions[0][0].x - 15.f * dt_, positions[0][0].y };
+		positions[0][0] = { positions[0][0].x - 500.f * dt_, positions[0][0].y };
 	else
-		positions[0][1] = { positions[0][1].x - 15.f * dt_, positions[0][1].y };
+		positions[0][1] = { positions[0][1].x - 500.f * dt_, positions[0][1].y };
 
 
 
@@ -136,17 +136,18 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 	float left = (wnd_.getView().getCenter().x - 400.f); // vector magnitude from start X to current X left side of screen
 	if (isBGCopyBehind == true)
 	{
-		if (positions[0][0].x <= left - sizes[0].x - 800.f)
+		if (positions[0][0].x <= left - sizes[0].x )
 		{
-
+			std::cout << "copy now in front" << std::endl;
 			this->isBGCopyBehind = false;
 			positions[0][0].x = positions[0][1].x + sizes[0].x;
 		}
 	}
 	else if (isBGCopyBehind == false)
 	{
-		if (positions[0][1].x <= left - sizes[0].x - 800.f)
+		if (positions[0][1].x <= left - sizes[0].x )
 		{
+			std::cout << "copy now in back" << std::endl;
 
 			this->isBGCopyBehind = true;
 			positions[0][1].x = positions[0][0].x + sizes[0].x;
@@ -183,20 +184,40 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 				// There's an overlap
 				sf::Sprite bgLayer0 = {};
 				bgLayer0.setTexture(Cfg::textures.get((int)texID[0]));
-				bgLayer0.setTextureRect({ sf::Vector2i({sf::IntRect(intersection).left - (int)positions[0][0].x,
-					sf::IntRect(intersection).top}),{sf::IntRect(intersection).width,
+				bgLayer0.setTextureRect({ sf::Vector2i({(int)abs(positions[0][0].x) + (int)(wnd_.getView().getCenter().x - 400.f),
+					(int)abs(positions[0][0].y)}),{sf::IntRect(intersection).width,
 					sf::IntRect(intersection).height} });
-				bgLayer0.setPosition({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f) });
+				bgLayer0.setPosition(sf::Vector2f({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f) }));
 				wnd_.draw(bgLayer0);
 			
 				sf::Sprite bgLayerCopy0 = {};
 				bgLayerCopy0.setTexture(Cfg::textures.get((int)texID[0]));
-				bgLayerCopy0.setTextureRect({ sf::Vector2i({sf::IntRect(intersection).left - (int)positions[0][0].x,
-					sf::IntRect(intersection).top}),{sf::IntRect(intersection).width,
+				bgLayerCopy0.setTextureRect({ sf::Vector2i({(int)((int)abs(positions[0][1].x) - (int)sizes[0].x) + (int)(wnd_.getView().getCenter().x - 400.f) + (int)abs(positions[0][0].x) +  800,
+					(int)(abs(positions[0][0].y))}),{ (int)(std::max(800.f - (sizes[0].x - bgLayer0.getPosition().x), 0.f)),
 					sf::IntRect(intersection).height} });
-				bgLayerCopy0.setPosition({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f) });
+				bgLayerCopy0.setPosition(sf::Vector2f({ ( positions[0][0].x + sizes[0].x), (bgLayer0.getPosition().y)}));
 				wnd_.draw(bgLayerCopy0);
 			}
+			else
+			{
+				// There's an overlap
+				sf::Sprite bgLayer0 = {};
+				bgLayer0.setTexture(Cfg::textures.get((int)texID[0]));
+				bgLayer0.setTextureRect({ sf::Vector2i({(int)abs(positions[0][1].x) + (int)(wnd_.getView().getCenter().x - 400.f),
+					(int)abs(positions[0][1].y)}),{sf::IntRect(intersection).width,
+					sf::IntRect(intersection).height} });
+				bgLayer0.setPosition(sf::Vector2f({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f) }));
+				wnd_.draw(bgLayer0);
+
+				sf::Sprite bgLayerCopy0 = {};
+				bgLayerCopy0.setTexture(Cfg::textures.get((int)texID[0]));
+				bgLayerCopy0.setTextureRect({ sf::Vector2i({(int)((int)abs(positions[0][0].x) - (int)sizes[0].x) + (int)(wnd_.getView().getCenter().x - 400.f) + (int)abs(positions[0][1].x) + 800,
+					(int)(abs(positions[0][1].y))}),{ (int)(std::max(800.f - (sizes[0].x - bgLayer0.getPosition().x), 0.f)),
+					sf::IntRect(intersection).height} });
+				bgLayerCopy0.setPosition(sf::Vector2f({ (positions[0][0].x + sizes[0].x), (bgLayer0.getPosition().y) }));
+				wnd_.draw(bgLayerCopy0);
+			}
+
 
 		}
 		else

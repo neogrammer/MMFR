@@ -13,7 +13,7 @@ Player::Player()
 		//offsets.emplace_back(sf::Vector2f{43.f,68.f});
 		addBBox("Idle", "Right", { {43.f,48.f},{56.f,80.f} });
 	}
-	animator.addAnimation("Idle", "Right", { 130.f,160.f }, { 0.f,160.f }, 3, Cfg::Textures::PlayerAtlas, 0.13f, 2.f );
+	animator.addAnimation("Idle", "Right", { 130.f,160.f }, { 0.f,160.f }, 3, Cfg::Textures::PlayerAtlas, 2.f, 0.f );
 
 	//offsets.clear();
 	//offsets.reserve(3);
@@ -23,7 +23,7 @@ Player::Player()
 		//offsets.emplace_back(sf::Vector2f{ 38.f,68.f });
 		addBBox("Idle", "Left", { {38.f,48.f},{56.f,80.f} });
 	}
-	animator.addAnimation("Idle", "Left", { 130.f,160.f }, { 0.f,14*160.f }, 3, Cfg::Textures::PlayerAtlas, 0.13f, 2.f);
+	animator.addAnimation("Idle", "Left", { 130.f,160.f }, { 0.f,14*160.f }, 3, Cfg::Textures::PlayerAtlas, 2.f, 0.f);
 
 
 	//offsets.clear();
