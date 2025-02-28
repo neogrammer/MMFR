@@ -109,18 +109,9 @@ void Background::update(float dt_)
 	//	positions[2] = { 0.f,0.f };
 	//}
 	if (this->isBGCopyBehind)
-		positions[0][0] = { positions[0][0].x - 500.f * dt_, positions[0][0].y };
+		positions[0][0] = { positions[0][0].x - 15.f * dt_, positions[0][0].y };
 	else
-		positions[0][1] = { positions[0][1].x - 500.f * dt_, positions[0][1].y };
-
-
-
-
-}
-
-void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
-{
-	
+		positions[0][1] = { positions[0][1].x - 15.f * dt_, positions[0][1].y };
 
 	if (this->isBGCopyBehind)
 	{
@@ -132,25 +123,45 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 	}
 
 
+}
+
+void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
+{
+	
+
+
+
 
 	float left = (wnd_.getView().getCenter().x - 400.f); // vector magnitude from start X to current X left side of screen
 	if (isBGCopyBehind == true)
 	{
-		if (positions[0][0].x <= left - sizes[0].x )
+		if (positions[0][0].x <= viewBounds.left - sizes[0].x )
 		{
-			std::cout << "copy now in front" << std::endl;
+			std::cout << "copy now in front\n pos[0]0].x = " << positions[0][0].x << " and pos[0][1].x = " << positions[0][1].x;
 			this->isBGCopyBehind = false;
 			positions[0][0].x = positions[0][1].x + sizes[0].x;
+			std::cout << "\nafter adjustment pos[0]0].x = " << positions[0][0].x << " and pos[0][1].x = " << positions[0][1].x << std::endl;
+
+		/*	if (this->isBGCopyBehind)
+			{
+				positions[0][1] = { positions[0][0].x + sizes[currentLevel].x, positions[0][0].y };
+			}
+			else
+			{
+				positions[0][0] = { positions[0][1].x + sizes[currentLevel].x, positions[0][1].y };
+			}*/
+
 		}
 	}
 	else if (isBGCopyBehind == false)
 	{
-		if (positions[0][1].x <= left - sizes[0].x )
+		if (positions[0][1].x <= viewBounds.left - sizes[0].x )
 		{
-			std::cout << "copy now in back" << std::endl;
+			std::cout << "copy now in back\n pos[0]0].x = " << positions[0][0].x << " and pos[0][1].x = " << positions[0][1].x;
 
 			this->isBGCopyBehind = true;
 			positions[0][1].x = positions[0][0].x + sizes[0].x;
+			std::cout << "\nafter adjustment pos[0]0].x = " << positions[0][0].x << " and pos[0][1].x = " << positions[0][1].x << std::endl;
 		}
 	}
 	//if (diff + 800.f >= sizes[0].x / 2.f + sizes[0].x - 800.f)
@@ -171,9 +182,13 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 	if (texID.size() > 0) {
 		sf::FloatRect backgroundRect = {};
 		if (isBGCopyBehind == true)
-			backgroundRect = sf::FloatRect(positions[0][0].x, positions[0][0].y, sizes[0].x * 2.f, sizes[0].y);
+		{
+			backgroundRect = sf::FloatRect(positions[0][0].x, positions[0][0].y, sizes[0].x, sizes[0].y);
+		}
 		else
-			backgroundRect = sf::FloatRect(positions[0][1].x, positions[0][1].y, sizes[0].x * 2.f, sizes[0].y);
+		{
+			backgroundRect = sf::FloatRect(positions[0][1].x, positions[0][1].y, sizes[0].x, sizes[0].y);
+		}
 
 
 		sf::FloatRect intersection;
@@ -184,18 +199,18 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 				// There's an overlap
 				sf::Sprite bgLayer0 = {};
 				bgLayer0.setTexture(Cfg::textures.get((int)texID[0]));
-				bgLayer0.setTextureRect({ sf::Vector2i({(int)abs(positions[0][0].x) + (int)(wnd_.getView().getCenter().x - 400.f),
-					(int)abs(positions[0][0].y)}),{(int)(std::max(800.f - (sizes[0].x - wnd_.getView().getCenter().x), 800.f)),
+				bgLayer0.setTextureRect({ sf::Vector2i({(int)viewBounds.left - (int)positions[0][0].x,//(int)abs(positions[0][0].x) + (int)(wnd_.getView().getCenter().x - 400.f),
+					(int)abs(positions[0][0].y)}),/*{(int)(std::max(800.f - (sizes[0].x - wnd_.getView().getCenter().x), 800.f))*/ {int(std::min(sizes[0].x - (wnd_.getView().getCenter().x - 400.f) - (sizes[0].x - (wnd_.getView().getCenter().x + 400.f)), float(sizes[0].x + positions[0][0].x  - (wnd_.getView().getCenter().x - 400.f)))) ,
 					sf::IntRect(intersection).height} });
 				bgLayer0.setPosition(sf::Vector2f({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f) }));
 				wnd_.draw(bgLayer0);
 			
 				sf::Sprite bgLayerCopy0 = {};
 				bgLayerCopy0.setTexture(Cfg::textures.get((int)texID[0]));
-				bgLayerCopy0.setTextureRect({ sf::Vector2i({(int)((int)abs(positions[0][1].x) - (int)sizes[0].x) + (int)(wnd_.getView().getCenter().x - 400.f) + (int)abs(positions[0][0].x),
-					(int)(abs(positions[0][0].y))}),{ 800 - (int)(std::max(800.f - (sizes[0].x - wnd_.getView().getCenter().x), 0.f)),
+				bgLayerCopy0.setTextureRect({ sf::Vector2i({(int)(std::max(((abs(positions[0][1].x) - sizes[0].x)), 0.f)),
+					(int)(abs(positions[0][0].y))}),{805 - bgLayer0.getTextureRect().width,
 					sf::IntRect(intersection).height} });
-				bgLayerCopy0.setPosition(sf::Vector2f({ ( positions[0][0].x + sizes[0].x), (bgLayer0.getPosition().y)}));
+				bgLayerCopy0.setPosition(sf::Vector2f({ (wnd_.getView().getCenter().x - 400.f)  + bgLayer0.getTextureRect().width /*(positions[0][0].x + sizes[0].x)*/, (bgLayer0.getPosition().y)}));
 				wnd_.draw(bgLayerCopy0);
 			}
 			else
@@ -203,18 +218,18 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 				// There's an overlap
 				sf::Sprite bgLayer0 = {};
 				bgLayer0.setTexture(Cfg::textures.get((int)texID[0]));
-				bgLayer0.setTextureRect({ sf::Vector2i({(int)abs(positions[0][1].x) + (int)(wnd_.getView().getCenter().x - 400.f),
-					(int)abs(positions[0][1].y)}),{(int)(std::max(800.f - (sizes[0].x - wnd_.getView().getCenter().x), 800.f)),
+				bgLayer0.setTextureRect({ sf::Vector2i({(int)viewBounds.left - (int)positions[0][1].x,//abs(positions[0][1].x) + (int)(wnd_.getView().getCenter().x - 400.f),
+					(int)abs(positions[0][1].y)}),/*{(int)(std::max(800.f - (sizes[0].x - wnd_.getView().getCenter().x), 800.f))*/ {int(std::min(sizes[0].x - (wnd_.getView().getCenter().x - 400.f) - (sizes[0].x - (wnd_.getView().getCenter().x + 400.f)), float(sizes[0].x + positions[0][1].x - (wnd_.getView().getCenter().x - 400.f)))) ,
 					sf::IntRect(intersection).height} });
-				bgLayer0.setPosition(sf::Vector2f({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f) }));
+				bgLayer0.setPosition(sf::Vector2f({ (wnd_.getView().getCenter().x - 400.f), (wnd_.getView().getCenter().y - 300.f)}));
 				wnd_.draw(bgLayer0);
 
 				sf::Sprite bgLayerCopy0 = {};
 				bgLayerCopy0.setTexture(Cfg::textures.get((int)texID[0]));
-				bgLayerCopy0.setTextureRect({ sf::Vector2i({(int)((int)abs(positions[0][0].x) - (int)sizes[0].x) + (int)(wnd_.getView().getCenter().x - 400.f) + (int)abs(positions[0][1].x),
-					(int)(abs(positions[0][1].y))}),{ 800 - (int)(std::max(800.f - (sizes[0].x - wnd_.getView().getCenter().x), 0.f)),
-					sf::IntRect(intersection).height} });
-				bgLayerCopy0.setPosition(sf::Vector2f({ (positions[0][1].x + sizes[0].x), (bgLayer0.getPosition().y) }));
+				bgLayerCopy0.setTextureRect({ sf::Vector2i({(int)(std::max(((abs(positions[0][0].x) - sizes[0].x)), 0.f)),
+									(int)(abs(positions[0][1].y))}),{805 - bgLayer0.getTextureRect().width,
+									sf::IntRect(intersection).height} });
+				bgLayerCopy0.setPosition(sf::Vector2f({ (wnd_.getView().getCenter().x - 400.f) + bgLayer0.getTextureRect().width /*(positions[0][1].x + sizes[0].x)*/, (bgLayer0.getPosition().y)}));
 				wnd_.draw(bgLayerCopy0);
 			}
 
@@ -234,14 +249,14 @@ void Background::render(sf::RenderWindow& wnd_, sf::FloatRect viewBounds)
 		sf::Sprite bgLayer1 = {};
 		bgLayer1.setTexture(Cfg::textures.get((int)texID[1]));
 		bgLayer1.setPosition(positions[1][0]);
-		wnd_.draw(bgLayer1);
+		//wnd_.draw(bgLayer1);
 	}
 	if (texID.size() > 2)
 	{
 		sf::Sprite bgLayer2 = {};
 		bgLayer2.setTexture(Cfg::textures.get((int)texID[2]));
 		bgLayer2.setPosition(positions[2][0]);
-		wnd_.draw(bgLayer2);
+		//wnd_.draw(bgLayer2);
 	}
 
 	
