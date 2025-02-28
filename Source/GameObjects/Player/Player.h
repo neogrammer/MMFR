@@ -14,6 +14,9 @@ class Player : public DynamicObject
 	bool leftHeld{ false };
 	bool leftDown{ false };
 	bool leftPressed{false};
+	bool shootHeld{ false };
+	bool shootDown{ false };
+	bool shootPressed{ false };
 	bool canJump{ false };
 	FSM_Player animFSM;
 public:

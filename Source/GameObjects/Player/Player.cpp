@@ -57,6 +57,19 @@ Player::Player()
 		addBBox("Jump", "Left", { {43.f,48.f},{56.f,80.f} });
 	}
 	animator.addAnimation("Jump", "Left", { 130.f,160.f }, { 0.f,18*160.f }, 11, Cfg::Textures::PlayerAtlas, 0.13f, 2.f);
+
+	for (int i = 0; i < 3; i++)
+	{
+		addBBox("Shoot", "Right", { {43.f,48.f},{56.f,80.f} });
+	}
+	animator.addAnimation("Shoot", "Right", { 130.f,160.f }, { 8 * 130.f, 1 * 160.f }, 3, Cfg::Textures::PlayerAtlas, 0.08f, 10000.f);
+
+	for (int i = 0; i < 3; i++)
+	{
+		addBBox("Shoot", "Left", { {43.f,48.f},{56.f,80.f} });
+	}
+	animator.addAnimation("Shoot", "Left", { 130.f,160.f }, { 8 * 130.f,  14 * 160.f }, 3, Cfg::Textures::PlayerAtlas, 0.08f, 10000.f);
+
 	animator.setCurrAnimDir("Right");
 	animator.setCurrAnimID("Idle");
 
@@ -210,6 +223,18 @@ void Player::processInput()
 	{
 		rightDown = false;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+	{
+		shootDown = true;
+	}
+	else
+	{
+		if (shootDown)
+		{
+			dispatch(animFSM, EventStoppedShooting{});
+		}
+		shootDown = false;
+	}
 
 	if (jumpDown)
 	{
@@ -283,18 +308,31 @@ void Player::processInput()
 	}
 
 
-	if (jumpPressed)
+	if (shootDown)
 	{
-
-		//dispatch(animFSM, EventBeganJump{});
-
-		/*if (this->getAnimationID() != "Jump")
+		if (shootDown && !shootPressed && !shootHeld)
 		{
-			this->setAnimation("Jump");
-		}*/
+			// fire bullet, start shooting animation
+			shootPressed = true;
+			shootHeld = false;
+		}
+		else if (shootDown && shootPressed && !shootHeld)
+		{
+			shootHeld = true;
+			shootPressed = false;
+		}
+		else if (shootDown && !leftPressed && leftHeld)
+		{
+			// start shoot delay timer?
+		}
+	}
+	else
+	{
+		shootPressed = false;
+		shootHeld = false;
 	}
 
-	else if (leftPressed)
+	if (leftPressed)
 	{
 		
 		//dispatch(animFSM, EventStartedMoving{});
@@ -335,6 +373,12 @@ void Player::processInput()
 		
 
 	}
+
+	if (shootPressed && shootDown)
+	{
+		dispatch(animFSM, EventStartedShooting{});
+	}
+
 
 	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
