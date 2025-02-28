@@ -273,12 +273,13 @@ public:
 
             if (dynamic_cast<Player*>(dynamicObj) != nullptr)
             {
-                dynamic_cast<Player*>(dynamicObj)->setAnimation("Idle");
+                dynamic_cast<Player*>(dynamicObj)->Land();
+               /* setAnimation("Idle");
 
                 if (std::abs(dynamic_cast<Player*>(dynamicObj)->currVelocity().x) >= 0.01f)
-                    dynamic_cast<Player*>(dynamicObj)->setAnimation("Walk");
+                    dynamic_cast<Player*>(dynamicObj)->setAnimation("Walk");*/
 
-                dynamic_cast<Player*>(dynamicObj)->setCanJump(true);
+                //dynamic_cast<Player*>(dynamicObj)->setCanJump(true);
             }
 
         }

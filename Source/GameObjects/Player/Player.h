@@ -1,6 +1,7 @@
 #pragma once
 #include <GameObjects/DynamicObject.h>
 #include "Animation/Animator.h"
+#include <FSM/PlayerAnimFSM.h>
 
 class Player : public DynamicObject
 {
@@ -14,6 +15,7 @@ class Player : public DynamicObject
 	bool leftDown{ false };
 	bool leftPressed{false};
 	bool canJump{ false };
+	FSM_Player animFSM;
 public:
 	Player();
 	~Player();
@@ -23,6 +25,8 @@ public:
 	std::string getAnimationID();
 	Animation& getAnimation();
 
+	void Land();
+	void syncAnimState();
 	void setAnimation(std::string animID);
 	void setCurrDir(std::string dir_);
 	void processInput();

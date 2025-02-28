@@ -90,11 +90,19 @@ void Player::Update(float dt_)
 		// user needs to move
 		if (rightPressed || rightDown)
 		{
+			if (rightPressed)
+				dispatch(animFSM, EventStartedMoving{});
 			velocity.x = 300.f;
 		}
 		if (leftPressed || leftDown)
 		{
+			if (leftPressed)
+				dispatch(animFSM, EventStartedMoving{});
 			velocity.x = -300.f;
+		}
+		if (jumpPressed)
+		{
+			dispatch(animFSM, EventBeganJump{});
 		}
 	/*	if (jumpPressed && canJump)
 		{
@@ -106,11 +114,17 @@ void Player::Update(float dt_)
 
 
 	if ((!rightDown && !leftDown) || (rightDown && leftDown))
+	{
+		dispatch(animFSM, EventStoppedMoving{});
+
 		velocity.x = 0.f;
+	}
 
 	posx += currVelocity().x * dt_;
 	posy += currVelocity().y * dt_;
 	setVelocity({ currVelocity().x, currVelocity().y + Physics::Gravity * dt_ });
+
+
 
 }
 
@@ -131,6 +145,28 @@ std::string Player::getAnimationID()
 Animation& Player::getAnimation()
 {
 	return animator.getAnimation();
+}
+
+void Player::Land()
+{
+	dispatch(animFSM, EventLanding{ (velocity.x != 0.f) ? true : false });
+	setCanJump(true);
+}
+
+void Player::syncAnimState()
+{
+	auto oldName = animator.getCurrAnimID();
+
+	auto name = animFSM.getStateName();
+
+	if (oldName != name)
+	{
+			setAnimation(name);
+		//else
+		//{
+		//	//do nothing
+		//}
+	} // else do nothing
 }
 
 void Player::setAnimation(std::string animID)
@@ -250,44 +286,54 @@ void Player::processInput()
 	if (jumpPressed)
 	{
 
+		//dispatch(animFSM, EventBeganJump{});
 
-		if (this->getAnimationID() != "Jump")
+		/*if (this->getAnimationID() != "Jump")
 		{
 			this->setAnimation("Jump");
-		}
+		}*/
 	}
 
 	else if (leftPressed)
 	{
 		
-
-		if (this->getAnimationID() != "Walk" || this->getCurrDir() != "Left")
+		//dispatch(animFSM, EventStartedMoving{});
+		/*if (this->getAnimationID() != "Walk" || this->getCurrDir() != "Left")
 		{
 			this->setAnimation("Walk");
-		}
+		}*/
 
 		this->setCurrDir("Left");
 	}
 
 	else if (rightPressed)
 	{
+		//dispatch(animFSM, EventStartedMoving{});
 
 
-		if (this->getAnimationID() != "Walk" || this->getCurrDir() != "Right")
-		{
-			this->setAnimation("Walk");
-		}
+		//if (this->getAnimationID() != "Walk" || this->getCurrDir() != "Right")
+		//{
+		//	this->setAnimation("Walk");
+		//}
 
 		this->setCurrDir("Right");
 	}
 
 	
-	else if (!rightDown && !leftDown && canJump)
+	else if ((rightDown || leftDown) && canJump && !(rightDown && leftDown))
 	{
-		if (this->getAnimationID() != "Idle")
+		if (rightDown)
+			setCurrDir("Right");
+		else
+			setCurrDir("Left");
+		/*if (this->getAnimationID() != "Idle")
 		{
 			this->setAnimation("Idle");
-		}
+		}*/
+		dispatch(animFSM, EventStartedMoving{});
+
+		
+
 	}
 
 	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))

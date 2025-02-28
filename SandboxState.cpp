@@ -198,7 +198,8 @@ void SandboxState::Update(float dt_, sf::RenderWindow& wnd_)
         //player.posy = player.tempPosition.y;
     }
    
-
+    // collisions handled for the state, now is the best time to update animations
+    player.syncAnimState();
 
     // Print position for debug
     //std::cout << "Player pos: (" << player.posx << ", " << player.posy << ")\n";
